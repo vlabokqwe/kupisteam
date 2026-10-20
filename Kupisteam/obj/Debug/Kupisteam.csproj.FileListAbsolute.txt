@@ -13,3 +13,14 @@ E:\ucheba\Kupisteam\Kupisteam\obj\Debug\Kupisteam.csproj.GenerateResource.cache
 E:\ucheba\Kupisteam\Kupisteam\obj\Debug\Kupisteam.csproj.CoreCompileInputs.cache
 E:\ucheba\Kupisteam\Kupisteam\obj\Debug\Kupisteam.exe
 E:\ucheba\Kupisteam\Kupisteam\obj\Debug\Kupisteam.pdb
+E:\ucheba\Kupisteam\Kupisteam\obj\Debug\AuthWindow.baml
+E:\ucheba\Kupisteam\Kupisteam\obj\Debug\CatalogPage.baml
+E:\ucheba\Kupisteam\Kupisteam\obj\Debug\TopUpPage.baml
+E:\ucheba\Kupisteam\Kupisteam\obj\Debug\CartPage.baml
+E:\ucheba\Kupisteam\Kupisteam\obj\Debug\ProfilePage.baml
+E:\ucheba\Kupisteam\Kupisteam\obj\Debug\AuthWindow.g.cs
+E:\ucheba\Kupisteam\Kupisteam\obj\Debug\CatalogPage.g.cs
+E:\ucheba\Kupisteam\Kupisteam\obj\Debug\TopUpPage.g.cs
+E:\ucheba\Kupisteam\Kupisteam\obj\Debug\CartPage.g.cs
+E:\ucheba\Kupisteam\Kupisteam\obj\Debug\ProfilePage.g.cs
+E:\ucheba\Kupisteam\Kupisteam\obj\Debug\App.baml

@@ -1,12 +1,107 @@
-﻿<Window x:Class="Kupisteam.MainWindow"
+<Window x:Class="Kupisteam.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Kupisteam"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="KupiSteam — магазин игр и пополнение Steam"
+        Height="840" Width="1320" MinWidth="1150" MinHeight="650"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource BgBrush}">
+    <Grid Background="{StaticResource BgBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="78"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- ===== ШАПКА ===== -->
+        <Border Background="#11111E" BorderBrush="#22223A" BorderThickness="0,0,0,1">
+            <Grid Margin="40,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Логотип -->
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Cursor="Hand"
+                            MouseLeftButtonDown="Logo_Click">
+                    <Border Width="42" Height="42" CornerRadius="12" Background="{StaticResource AccentBrush}">
+                        <TextBlock Text="K" Foreground="White" FontSize="24" FontWeight="Black"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <TextBlock Text="Kupi" Foreground="White" FontSize="24" FontWeight="Bold"
+                               VerticalAlignment="Center" Margin="12,0,0,0"/>
+                    <TextBlock Text="Steam" Foreground="{StaticResource AccentBrush}" FontSize="24"
+                               FontWeight="Bold" VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <!-- Меню -->
+                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button x:Name="NavCatalog" Style="{StaticResource NavButton}" Click="NavCatalog_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="&#xE80F;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                            <TextBlock Text="Каталог"/>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="NavTopUp" Style="{StaticResource NavButton}" Click="NavTopUp_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="&#xE8C7;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                            <TextBlock Text="Пополнить Steam"/>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="NavCart" Style="{StaticResource NavButton}" Click="NavCart_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="&#xE7BF;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                            <TextBlock Text="Корзина"/>
+                            <Border x:Name="CartBadge" Background="{StaticResource PinkBrush}" CornerRadius="9"
+                                    MinWidth="20" Height="20" Margin="8,0,0,0" Padding="6,0" Visibility="Collapsed">
+                                <TextBlock x:Name="CartCountText" Text="0" Foreground="White" FontSize="12"
+                                           FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+
+                <!-- Правая часть: баланс + аккаунт -->
+                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Border x:Name="BalancePanel" Background="#1B1B2E" CornerRadius="10" Padding="14,8"
+                            Margin="0,0,12,0" Visibility="Collapsed">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="&#xE8C7;" FontFamily="Segoe MDL2 Assets" Foreground="{StaticResource GreenBrush}"
+                                       VerticalAlignment="Center" Margin="0,0,8,0"/>
+                            <TextBlock x:Name="BalanceText" Text="0 ₽" Foreground="White" FontWeight="SemiBold" FontSize="14"/>
+                        </StackPanel>
+                    </Border>
+                    <Button x:Name="ProfileButton" Style="{StaticResource GhostButton}" Click="ProfileButton_Click"
+                            Visibility="Collapsed">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="&#xE77B;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                            <TextBlock x:Name="ProfileName" Text="Профиль"/>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="LoginButton" Content="Войти" Style="{StaticResource AccentButton}"
+                            Click="LoginButton_Click"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- ===== СОДЕРЖИМОЕ (страницы) ===== -->
+        <Frame x:Name="MainFrame" Grid.Row="1" NavigationUIVisibility="Hidden"/>
+
+        <!-- ===== ВСПЛЫВАЮЩЕЕ УВЕДОМЛЕНИЕ ===== -->
+        <Border x:Name="Toast" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                Margin="0,0,30,30" Padding="20,14" CornerRadius="12" Background="#1F1F35"
+                BorderBrush="{StaticResource PurpleBrush}" BorderThickness="1" Opacity="0" IsHitTestVisible="False">
+            <Border.Effect>
+                <DropShadowEffect Color="#8A5CFF" BlurRadius="30" ShadowDepth="0" Opacity="0.5"/>
+            </Border.Effect>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="&#xE73E;" FontFamily="Segoe MDL2 Assets" Foreground="{StaticResource GreenBrush}"
+                           FontSize="16" VerticalAlignment="Center" Margin="0,0,12,0"/>
+                <TextBlock x:Name="ToastText" Text="Готово" Foreground="White" FontSize="14" FontWeight="SemiBold"/>
+            </StackPanel>
+        </Border>
     </Grid>
 </Window>

@@ -1,0 +1,227 @@
+<Page x:Class="Kupisteam.CatalogPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Каталог" Unloaded="Page_Unloaded">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="40,30,40,0" MaxWidth="1240">
+
+            <!-- ===== БАННЕР (слайдер) ===== -->
+            <Grid Height="360">
+                <Border x:Name="BannerImage" CornerRadius="22">
+                    <Border.Background>
+                        <ImageBrush x:Name="BannerBrush" Stretch="UniformToFill"/>
+                    </Border.Background>
+                </Border>
+                <!-- затемнение слева, чтобы текст читался -->
+                <Border CornerRadius="22">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                            <GradientStop Color="#F00D0D17" Offset="0"/>
+                            <GradientStop Color="#900D0D17" Offset="0.45"/>
+                            <GradientStop Color="#000D0D17" Offset="0.8"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+
+                <StackPanel x:Name="BannerContent" VerticalAlignment="Center" Margin="56,0,0,0" MaxWidth="520"
+                            HorizontalAlignment="Left">
+                    <Border Background="{StaticResource AccentBrush}" CornerRadius="8" Padding="12,5"
+                            HorizontalAlignment="Left">
+                        <TextBlock x:Name="BannerTag" Text="ХИТ ПРОДАЖ" Foreground="White" FontSize="12" FontWeight="Bold"/>
+                    </Border>
+                    <TextBlock x:Name="BannerTitle" Text="Cyberpunk 2077" Foreground="White" FontSize="44"
+                               FontWeight="Black" Margin="0,14,0,8" TextWrapping="Wrap"/>
+                    <TextBlock x:Name="BannerText" Text="Описание" Foreground="#C8C8DD" FontSize="16"
+                               TextWrapping="Wrap" LineHeight="24"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,24,0,0">
+                        <Button Content="Купить сейчас" Style="{StaticResource AccentButton}" FontSize="15"
+                                Padding="28,13" Click="BannerBuy_Click"/>
+                        <StackPanel VerticalAlignment="Center" Margin="22,0,0,0">
+                            <TextBlock x:Name="BannerOldPrice" Text="" Foreground="#8888A0" FontSize="13"
+                                       TextDecorations="Strikethrough"/>
+                            <TextBlock x:Name="BannerPrice" Text="" Foreground="White" FontSize="24" FontWeight="Bold"/>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- стрелки -->
+                <Button Content="&#xE76B;" Style="{StaticResource IconButton}" Background="#80000000"
+                        HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0" Click="Prev_Click"/>
+                <Button Content="&#xE76C;" Style="{StaticResource IconButton}" Background="#80000000"
+                        HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0" Click="Next_Click"/>
+
+                <!-- точки -->
+                <StackPanel x:Name="Dots" Orientation="Horizontal" HorizontalAlignment="Center"
+                            VerticalAlignment="Bottom" Margin="0,0,0,18"/>
+            </Grid>
+
+            <!-- ===== ПРЕИМУЩЕСТВА ===== -->
+            <UniformGrid Columns="4" Margin="-8,24,-8,0">
+                <Border Style="{StaticResource Panel}" Margin="8" Padding="20">
+                    <StackPanel Orientation="Horizontal">
+                        <Border Width="46" Height="46" CornerRadius="12" Background="#2A1F4D">
+                            <TextBlock Text="&#xE945;" FontFamily="Segoe MDL2 Assets" FontSize="20"
+                                       Foreground="#B79BFF" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <StackPanel Margin="14,0,0,0" VerticalAlignment="Center">
+                            <TextBlock Text="Моментально" Foreground="White" FontWeight="SemiBold" FontSize="15"/>
+                            <TextBlock Text="Ключ сразу после оплаты" Foreground="{StaticResource GrayText}" FontSize="12"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource Panel}" Margin="8" Padding="20">
+                    <StackPanel Orientation="Horizontal">
+                        <Border Width="46" Height="46" CornerRadius="12" Background="#4D1F3A">
+                            <TextBlock Text="&#xEA18;" FontFamily="Segoe MDL2 Assets" FontSize="20"
+                                       Foreground="#FF8CC6" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <StackPanel Margin="14,0,0,0" VerticalAlignment="Center">
+                            <TextBlock Text="Гарантия" Foreground="White" FontWeight="SemiBold" FontSize="15"/>
+                            <TextBlock Text="Только официальные ключи" Foreground="{StaticResource GrayText}" FontSize="12"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource Panel}" Margin="8" Padding="20">
+                    <StackPanel Orientation="Horizontal">
+                        <Border Width="46" Height="46" CornerRadius="12" Background="#1F4D3D">
+                            <TextBlock Text="&#xE8C7;" FontFamily="Segoe MDL2 Assets" FontSize="20"
+                                       Foreground="#3DDC97" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <StackPanel Margin="14,0,0,0" VerticalAlignment="Center">
+                            <TextBlock Text="Низкие цены" Foreground="White" FontWeight="SemiBold" FontSize="15"/>
+                            <TextBlock Text="Скидки до 70% каждый день" Foreground="{StaticResource GrayText}" FontSize="12"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource Panel}" Margin="8" Padding="20">
+                    <StackPanel Orientation="Horizontal">
+                        <Border Width="46" Height="46" CornerRadius="12" Background="#1F3A4D">
+                            <TextBlock Text="&#xE8BD;" FontFamily="Segoe MDL2 Assets" FontSize="20"
+                                       Foreground="#6CC4FF" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <StackPanel Margin="14,0,0,0" VerticalAlignment="Center">
+                            <TextBlock Text="Поддержка 24/7" Foreground="White" FontWeight="SemiBold" FontSize="15"/>
+                            <TextBlock Text="Ответим за 5 минут" Foreground="{StaticResource GrayText}" FontSize="12"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </UniformGrid>
+
+            <!-- ===== БАННЕР ПОПОЛНЕНИЯ STEAM ===== -->
+            <Grid Height="200" Margin="0,24,0,0" Cursor="Hand" MouseLeftButtonDown="TopUpBanner_Click">
+                <Border CornerRadius="22">
+                    <Border.Background>
+                        <ImageBrush ImageSource="pack://application:,,,/Images/topup.jpg" Stretch="UniformToFill"
+                                    AlignmentY="Center"/>
+                    </Border.Background>
+                </Border>
+                <StackPanel VerticalAlignment="Center" Margin="48,0,0,0" HorizontalAlignment="Left">
+                    <TextBlock Text="Пополнение кошелька Steam" Foreground="White" FontSize="30" FontWeight="Black"/>
+                    <TextBlock Text="Без комиссии банка • Зачисление за 1 минуту • От 100 ₽" Foreground="#C8C8DD"
+                               FontSize="15" Margin="0,6,0,18"/>
+                    <Button Content="Пополнить баланс  →" Style="{StaticResource AccentButton}"
+                            HorizontalAlignment="Left" Click="TopUpButton_Click"/>
+                </StackPanel>
+            </Grid>
+
+            <!-- ===== КАТАЛОГ ===== -->
+            <Grid Margin="0,40,0,20">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="Каталог игр" Foreground="White" FontSize="30" FontWeight="Black"/>
+                    <TextBlock x:Name="FoundText" Text="" Foreground="{StaticResource GrayText}" FontSize="15"
+                               VerticalAlignment="Bottom" Margin="14,0,0,6"/>
+                </StackPanel>
+                <Grid HorizontalAlignment="Right" Width="320">
+                    <TextBox x:Name="SearchBox" Style="{StaticResource DarkTextBox}" Tag="Поиск игры..."
+                             Padding="40,10,12,10" TextChanged="SearchBox_TextChanged"/>
+                    <TextBlock Text="&#xE721;" FontFamily="Segoe MDL2 Assets" Foreground="{StaticResource GrayText}"
+                               VerticalAlignment="Center" Margin="15,0,0,0" IsHitTestVisible="False"/>
+                </Grid>
+            </Grid>
+
+            <!-- жанры -->
+            <StackPanel x:Name="GenresPanel" Orientation="Horizontal" Margin="0,0,0,24">
+                <Button Content="Все" Tag="Все" Style="{StaticResource GhostButton}" Margin="0,0,10,0" Click="Genre_Click"/>
+                <Button Content="RPG" Tag="RPG" Style="{StaticResource GhostButton}" Margin="0,0,10,0" Click="Genre_Click"/>
+                <Button Content="Экшен" Tag="Экшен" Style="{StaticResource GhostButton}" Margin="0,0,10,0" Click="Genre_Click"/>
+                <Button Content="Кооператив" Tag="Кооператив" Style="{StaticResource GhostButton}" Margin="0,0,10,0" Click="Genre_Click"/>
+                <Button Content="Инди" Tag="Инди" Style="{StaticResource GhostButton}" Margin="0,0,10,0" Click="Genre_Click"/>
+                <Button Content="Со скидкой %" Tag="Скидки" Style="{StaticResource GhostButton}" Margin="0,0,10,0" Click="Genre_Click"/>
+            </StackPanel>
+
+            <!-- список игр -->
+            <ItemsControl x:Name="GamesList" Margin="0,0,-20,0">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Style="{StaticResource GameCard}" Width="290" Margin="0,0,20,20">
+                            <StackPanel>
+                                <Grid Height="136">
+                                    <Border CornerRadius="14,14,0,0">
+                                        <Border.Background>
+                                            <ImageBrush ImageSource="{Binding Image}" Stretch="UniformToFill"/>
+                                        </Border.Background>
+                                    </Border>
+                                    <Border Background="#FF3D6E" CornerRadius="7" Padding="9,3" Margin="10"
+                                            HorizontalAlignment="Left" VerticalAlignment="Top"
+                                            Visibility="{Binding HasDiscount, Converter={StaticResource BoolToVis}}">
+                                        <TextBlock Text="{Binding DiscountText}" Foreground="White" FontWeight="Bold" FontSize="12"/>
+                                    </Border>
+                                </Grid>
+                                <StackPanel Margin="16,12,16,16">
+                                    <TextBlock Text="{Binding Genre}" Foreground="#A98BFF" FontSize="12" FontWeight="SemiBold"/>
+                                    <TextBlock Text="{Binding Name}" Foreground="White" FontSize="16" FontWeight="SemiBold"
+                                               TextTrimming="CharacterEllipsis" Margin="0,3,0,14"/>
+                                    <Grid>
+                                        <StackPanel VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding OldPriceText}" Foreground="#6E6E88" FontSize="12"
+                                                       TextDecorations="Strikethrough"/>
+                                            <TextBlock Text="{Binding PriceText}" Foreground="White" FontSize="19" FontWeight="Bold"/>
+                                        </StackPanel>
+                                        <Button Style="{StaticResource AccentButton}" Padding="14,9" FontSize="13"
+                                                HorizontalAlignment="Right" VerticalAlignment="Center"
+                                                Tag="{Binding}" Click="AddToCart_Click">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="&#xE7BF;" FontFamily="Segoe MDL2 Assets"
+                                                           VerticalAlignment="Center" Margin="0,0,7,0"/>
+                                                <TextBlock Text="В корзину"/>
+                                            </StackPanel>
+                                        </Button>
+                                    </Grid>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <TextBlock x:Name="EmptyText" Text="Ничего не найдено" Foreground="{StaticResource GrayText}"
+                       FontSize="18" HorizontalAlignment="Center" Margin="0,40" Visibility="Collapsed"/>
+
+            <!-- ===== ПОДВАЛ ===== -->
+            <Border BorderBrush="#22223A" BorderThickness="0,1,0,0" Margin="0,30,0,0" Padding="0,26">
+                <Grid>
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Kupi" Foreground="White" FontSize="20" FontWeight="Bold"/>
+                            <TextBlock Text="Steam" Foreground="{StaticResource AccentBrush}" FontSize="20" FontWeight="Bold"/>
+                        </StackPanel>
+                        <TextBlock Text="© 2026 KupiSteam. Учебный проект. Все товарные знаки принадлежат их владельцам."
+                                   Foreground="#6E6E88" FontSize="12" Margin="0,6,0,0"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                        <TextBlock Text="О нас" Foreground="{StaticResource GrayText}" Margin="0,0,24,0"/>
+                        <TextBlock Text="Гарантии" Foreground="{StaticResource GrayText}" Margin="0,0,24,0"/>
+                        <TextBlock Text="Поддержка" Foreground="{StaticResource GrayText}" Margin="0,0,24,0"/>
+                        <TextBlock Text="Контакты" Foreground="{StaticResource GrayText}"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</Page>
