@@ -85,7 +85,7 @@ namespace Kupisteam
             else
             {
                 PromoInfo.Text = "Такого промокода нет";
-                PromoInfo.Foreground = System.Windows.Media.Brushes.IndianRed;
+                PromoInfo.Foreground = (System.Windows.Media.Brush)FindResource("ErrorBrush");
             }
             Refresh();
         }

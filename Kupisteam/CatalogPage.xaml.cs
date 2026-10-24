@@ -36,9 +36,10 @@ namespace Kupisteam
             for (int i = 0; i < bannerImages.Length; i++)
             {
                 Border dot = new Border();
-                dot.Height = 8;
-                dot.CornerRadius = new CornerRadius(4);
-                dot.Margin = new Thickness(4, 0, 4, 0);
+                dot.Width = 15;
+                dot.Height = 9;
+                dot.CornerRadius = new CornerRadius(2);
+                dot.Margin = new Thickness(2, 0, 2, 0);
                 Dots.Children.Add(dot);
             }
 
@@ -66,28 +67,29 @@ namespace Kupisteam
             BannerText.Text = bannerTexts[index];
 
             Game game = Data.FindGame(bannerGames[index]);
+            BannerGenre.Text = game.Genre;
             BannerPrice.Text = game.PriceText;
             BannerOldPrice.Text = game.OldPriceText;
+            BannerDiscount.Text = game.DiscountText;
+            BannerDiscountBox.Visibility = game.HasDiscount ? Visibility.Visible : Visibility.Collapsed;
+            BannerOldPrice.Visibility = game.HasDiscount ? Visibility.Visible : Visibility.Collapsed;
+            BannerPrice.Foreground = game.HasDiscount
+                ? (Brush)FindResource("PriceGreenBrush")
+                : Brushes.White;
 
             // плавное появление
-            DoubleAnimation fade = new DoubleAnimation(0.3, 1, TimeSpan.FromSeconds(0.6));
+            DoubleAnimation fade = new DoubleAnimation(0.3, 1, TimeSpan.FromSeconds(0.4));
             BannerImage.BeginAnimation(OpacityProperty, fade);
             BannerContent.BeginAnimation(OpacityProperty, fade);
 
-            // активная точка длиннее
+            // активная точка светлее
             for (int i = 0; i < Dots.Children.Count; i++)
             {
                 Border dot = (Border)Dots.Children[i];
                 if (i == index)
-                {
-                    dot.Width = 28;
-                    dot.Background = (Brush)FindResource("AccentBrush");
-                }
+                    dot.Background = new SolidColorBrush(Color.FromArgb(160, 255, 255, 255));
                 else
-                {
-                    dot.Width = 8;
-                    dot.Background = new SolidColorBrush(Color.FromArgb(120, 255, 255, 255));
-                }
+                    dot.Background = new SolidColorBrush(Color.FromArgb(50, 255, 255, 255));
             }
         }
 
@@ -107,6 +109,13 @@ namespace Kupisteam
         {
             Game game = Data.FindGame(bannerGames[currentBanner]);
             AddGame(game);
+        }
+
+        // клик по картинке баннера — следующий слайд
+        private void BannerImage_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            timer.Stop(); timer.Start();
+            ShowBanner(currentBanner + 1);
         }
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)
@@ -143,7 +152,7 @@ namespace Kupisteam
             }
 
             GamesList.ItemsSource = result;
-            FoundText.Text = "найдено: " + result.Count;
+            FoundText.Text = "найдено игр: " + result.Count;
             EmptyText.Visibility = result.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
         }
 
@@ -152,9 +161,9 @@ namespace Kupisteam
             foreach (Button b in GenresPanel.Children)
             {
                 if ((string)b.Tag == genre)
-                    b.Background = (Brush)FindResource("AccentBrush");
+                    b.Background = (Brush)FindResource("StoreNavActiveBrush");
                 else
-                    b.Background = (Brush)FindResource("CardBrush");
+                    b.Background = Brushes.Transparent;
             }
         }
 

@@ -18,16 +18,23 @@ namespace Kupisteam
         {
             LoginForm.Visibility = Visibility.Visible;
             RegisterForm.Visibility = Visibility.Collapsed;
-            TabLogin.Background = (Brush)FindResource("AccentBrush");
-            TabRegister.Background = Brushes.Transparent;
+            SetTab(TabLogin, true);
+            SetTab(TabRegister, false);
         }
 
         void ShowRegister()
         {
             LoginForm.Visibility = Visibility.Collapsed;
             RegisterForm.Visibility = Visibility.Visible;
-            TabRegister.Background = (Brush)FindResource("AccentBrush");
-            TabLogin.Background = Brushes.Transparent;
+            SetTab(TabRegister, true);
+            SetTab(TabLogin, false);
+        }
+
+        // активная вкладка — подсвеченный фон и белый текст
+        void SetTab(System.Windows.Controls.Button tab, bool active)
+        {
+            tab.Background = active ? (Brush)FindResource("TabActiveBrush") : Brushes.Transparent;
+            tab.Foreground = active ? Brushes.White : (Brush)FindResource("GrayText");
         }
 
         private void TabLogin_Click(object sender, RoutedEventArgs e) { ShowLogin(); }

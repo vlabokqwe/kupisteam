@@ -1,114 +1,110 @@
 <Page x:Class="Kupisteam.TopUpPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      Title="Пополнение Steam">
+      Title="Пополнение Steam" FontFamily="Segoe UI">
 
     <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <StackPanel Margin="40,30,40,40" MaxWidth="1240">
+        <StackPanel Margin="40,24,40,40" MaxWidth="1240">
+            <TextBlock Text="Главная  >  Пополнение кошелька Steam" Style="{StaticResource Breadcrumb}"/>
+            <TextBlock Text="Пополнение кошелька Steam" Style="{StaticResource PageTitle}"/>
+            <TextBlock Text="Средства в кошельке Steam можно потратить на игры, DLC и предметы на Торговой площадке."
+                       Foreground="{StaticResource GrayText}" FontSize="13" Margin="0,6,0,20"/>
 
-            <!-- Шапка страницы с картинкой -->
-            <Grid Height="180">
-                <Border CornerRadius="22">
-                    <Border.Background>
-                        <ImageBrush ImageSource="pack://application:,,,/Images/topup.jpg" Stretch="UniformToFill"/>
-                    </Border.Background>
-                </Border>
-                <StackPanel VerticalAlignment="Center" Margin="48,0,0,0">
-                    <TextBlock Text="Пополнение Steam" Foreground="White" FontSize="38" FontWeight="Black"/>
-                    <TextBlock Text="Пополняй кошелёк Steam из России быстро и безопасно" Foreground="#C8C8DD"
-                               FontSize="16" Margin="0,6,0,0"/>
-                </StackPanel>
-            </Grid>
-
-            <Grid Margin="0,24,0,0">
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="24"/>
-                    <ColumnDefinition Width="400"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="340"/>
                 </Grid.ColumnDefinitions>
 
-                <!-- ===== ФОРМА ===== -->
-                <Border Style="{StaticResource Panel}" Padding="32">
-                    <StackPanel>
-                        <TextBlock Text="1. Логин аккаунта Steam" Foreground="White" FontSize="18" FontWeight="SemiBold"/>
-                        <TextBlock Text="Указывай именно логин для входа, а не никнейм" Foreground="{StaticResource GrayText}"
-                                   FontSize="13" Margin="0,4,0,12"/>
-                        <TextBox x:Name="SteamLoginBox" Style="{StaticResource DarkTextBox}" Tag="Например: gamer2026"/>
+                <StackPanel>
+                    <!-- ===== ЛОГИН ===== -->
+                    <Border Style="{StaticResource Panel}">
+                        <StackPanel>
+                            <TextBlock Text="Логин аккаунта Steam" Foreground="White" FontSize="16" FontWeight="Light"/>
+                            <Border Style="{StaticResource SectionLine}"/>
+                            <TextBlock Text="Указывайте именно логин для входа, а не никнейм в профиле."
+                                       Foreground="{StaticResource GrayText}" FontSize="12" Margin="0,0,0,10"/>
+                            <TextBox x:Name="SteamLoginBox" Style="{StaticResource DarkTextBox}" Tag="Например: gamer2026"
+                                     MaxWidth="400" HorizontalAlignment="Left" Width="400"/>
+                        </StackPanel>
+                    </Border>
 
-                        <TextBlock Text="2. Сумма пополнения" Foreground="White" FontSize="18" FontWeight="SemiBold"
-                                   Margin="0,30,0,0"/>
-                        <TextBlock Text="От 100 до 15 000 ₽" Foreground="{StaticResource GrayText}"
-                                   FontSize="13" Margin="0,4,0,12"/>
-                        <TextBox x:Name="AmountBox" Style="{StaticResource DarkTextBox}" Tag="Введите сумму в рублях"
-                                 FontSize="20" FontWeight="SemiBold" TextChanged="AmountBox_TextChanged"
-                                 PreviewTextInput="AmountBox_PreviewTextInput"/>
+                    <!-- ===== СУММА ===== -->
+                    <Border Style="{StaticResource Panel}" Margin="0,12,0,0">
+                        <StackPanel>
+                            <TextBlock Text="Сумма пополнения" Foreground="White" FontSize="16" FontWeight="Light"/>
+                            <Border Style="{StaticResource SectionLine}"/>
+                            <TextBlock Text="От 100 до 15 000 ₽" Foreground="{StaticResource GrayText}" FontSize="12"
+                                       Margin="0,0,0,10"/>
+                            <TextBox x:Name="AmountBox" Style="{StaticResource DarkTextBox}" Tag="Введите сумму в рублях"
+                                     Width="400" HorizontalAlignment="Left" FontSize="16"
+                                     TextChanged="AmountBox_TextChanged" PreviewTextInput="AmountBox_PreviewTextInput"/>
 
-                        <WrapPanel Margin="0,14,0,0">
-                            <Button Content="100 ₽" Tag="100" Style="{StaticResource GhostButton}" Margin="0,0,10,10" Click="Quick_Click"/>
-                            <Button Content="300 ₽" Tag="300" Style="{StaticResource GhostButton}" Margin="0,0,10,10" Click="Quick_Click"/>
-                            <Button Content="500 ₽" Tag="500" Style="{StaticResource GhostButton}" Margin="0,0,10,10" Click="Quick_Click"/>
-                            <Button Content="1 000 ₽" Tag="1000" Style="{StaticResource GhostButton}" Margin="0,0,10,10" Click="Quick_Click"/>
-                            <Button Content="2 000 ₽" Tag="2000" Style="{StaticResource GhostButton}" Margin="0,0,10,10" Click="Quick_Click"/>
-                            <Button Content="5 000 ₽" Tag="5000" Style="{StaticResource GhostButton}" Margin="0,0,10,10" Click="Quick_Click"/>
-                        </WrapPanel>
+                            <!-- быстрые суммы как карточки «Добавить средства» в Steam -->
+                            <WrapPanel Margin="0,14,0,0">
+                                <Button Content="100 ₽" Tag="100" Style="{StaticResource GhostButton}" Width="96" Margin="0,0,8,8" Click="Quick_Click"/>
+                                <Button Content="300 ₽" Tag="300" Style="{StaticResource GhostButton}" Width="96" Margin="0,0,8,8" Click="Quick_Click"/>
+                                <Button Content="500 ₽" Tag="500" Style="{StaticResource GhostButton}" Width="96" Margin="0,0,8,8" Click="Quick_Click"/>
+                                <Button Content="1 000 ₽" Tag="1000" Style="{StaticResource GhostButton}" Width="96" Margin="0,0,8,8" Click="Quick_Click"/>
+                                <Button Content="2 000 ₽" Tag="2000" Style="{StaticResource GhostButton}" Width="96" Margin="0,0,8,8" Click="Quick_Click"/>
+                                <Button Content="5 000 ₽" Tag="5000" Style="{StaticResource GhostButton}" Width="96" Margin="0,0,8,8" Click="Quick_Click"/>
+                            </WrapPanel>
+                        </StackPanel>
+                    </Border>
 
-                        <!-- шаги -->
-                        <UniformGrid Columns="3" Margin="0,24,0,0">
-                            <StackPanel Margin="0,0,12,0">
-                                <TextBlock Text="01" Foreground="{StaticResource AccentBrush}" FontSize="26" FontWeight="Black"/>
-                                <TextBlock Text="Введи логин и сумму" Foreground="{StaticResource GrayText}" TextWrapping="Wrap"/>
-                            </StackPanel>
-                            <StackPanel Margin="0,0,12,0">
-                                <TextBlock Text="02" Foreground="{StaticResource AccentBrush}" FontSize="26" FontWeight="Black"/>
-                                <TextBlock Text="Оплати с баланса KupiSteam" Foreground="{StaticResource GrayText}" TextWrapping="Wrap"/>
-                            </StackPanel>
-                            <StackPanel>
-                                <TextBlock Text="03" Foreground="{StaticResource AccentBrush}" FontSize="26" FontWeight="Black"/>
-                                <TextBlock Text="Деньги придут в Steam за минуту" Foreground="{StaticResource GrayText}" TextWrapping="Wrap"/>
-                            </StackPanel>
-                        </UniformGrid>
-                    </StackPanel>
-                </Border>
+                    <!-- ===== КАК ЭТО РАБОТАЕТ ===== -->
+                    <Border Style="{StaticResource Panel}" Margin="0,12,0,0">
+                        <StackPanel>
+                            <TextBlock Text="Как это работает" Foreground="White" FontSize="16" FontWeight="Light"/>
+                            <Border Style="{StaticResource SectionLine}"/>
+                            <TextBlock Foreground="#C7D5E0" FontSize="13" LineHeight="22">
+                                <Run Text="1.  Введите логин Steam и сумму пополнения."/><LineBreak/>
+                                <Run Text="2.  Оплатите заказ с баланса KupiSteam."/><LineBreak/>
+                                <Run Text="3.  Средства поступят в кошелёк Steam в течение минуты."/>
+                            </TextBlock>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
 
                 <!-- ===== ИТОГ ===== -->
-                <Border Grid.Column="2" Style="{StaticResource Panel}" Padding="28" VerticalAlignment="Top">
+                <Border Grid.Column="2" Padding="16" VerticalAlignment="Top" CornerRadius="3" Background="#0F1A26">
                     <StackPanel>
-                        <TextBlock Text="Ваш заказ" Foreground="White" FontSize="20" FontWeight="Bold" Margin="0,0,0,20"/>
+                        <TextBlock Text="Ваш заказ" Foreground="White" FontSize="16" FontWeight="Light" Margin="0,0,0,12"/>
 
-                        <Grid Margin="0,0,0,12">
-                            <TextBlock Text="Зачислим в Steam" Foreground="{StaticResource GrayText}" FontSize="15"/>
-                            <TextBlock x:Name="ReceiveText" Text="0 ₽" Foreground="White" FontSize="15"
-                                       FontWeight="SemiBold" HorizontalAlignment="Right"/>
+                        <Grid Margin="0,0,0,8">
+                            <TextBlock Text="Зачислим в Steam" Foreground="{StaticResource GrayText}" FontSize="13"/>
+                            <TextBlock x:Name="ReceiveText" Text="0 ₽" Foreground="#C7D5E0" FontSize="13"
+                                       HorizontalAlignment="Right"/>
                         </Grid>
-                        <Grid Margin="0,0,0,12">
-                            <TextBlock Text="Комиссия сервиса (5%)" Foreground="{StaticResource GrayText}" FontSize="15"/>
-                            <TextBlock x:Name="FeeText" Text="0 ₽" Foreground="White" FontSize="15"
-                                       FontWeight="SemiBold" HorizontalAlignment="Right"/>
+                        <Grid Margin="0,0,0,8">
+                            <TextBlock Text="Комиссия сервиса (5%)" Foreground="{StaticResource GrayText}" FontSize="13"/>
+                            <TextBlock x:Name="FeeText" Text="0 ₽" Foreground="#C7D5E0" FontSize="13"
+                                       HorizontalAlignment="Right"/>
                         </Grid>
-                        <Grid Margin="0,0,0,12">
-                            <TextBlock Text="Ваш баланс" Foreground="{StaticResource GrayText}" FontSize="15"/>
-                            <TextBlock x:Name="UserBalanceText" Text="—" Foreground="{StaticResource GreenBrush}" FontSize="15"
-                                       FontWeight="SemiBold" HorizontalAlignment="Right"/>
+                        <Grid Margin="0,0,0,8">
+                            <TextBlock Text="Ваш баланс" Foreground="{StaticResource GrayText}" FontSize="13"/>
+                            <TextBlock x:Name="UserBalanceText" Text="—" Foreground="#66C0F4" FontSize="13"
+                                       HorizontalAlignment="Right"/>
                         </Grid>
 
-                        <Border Height="1" Background="{StaticResource LineBrush}" Margin="0,8,0,16"/>
+                        <Border Height="1" Background="#2A3F5A" Margin="0,6,0,12"/>
 
                         <Grid>
-                            <TextBlock Text="К оплате" Foreground="White" FontSize="18" FontWeight="SemiBold"
+                            <TextBlock Text="Итого:" Foreground="White" FontSize="15" FontWeight="SemiBold"
                                        VerticalAlignment="Center"/>
-                            <TextBlock x:Name="TotalText" Text="0 ₽" Foreground="White" FontSize="30"
-                                       FontWeight="Black" HorizontalAlignment="Right"/>
+                            <TextBlock x:Name="TotalText" Text="0 ₽" Foreground="White" FontSize="18"
+                                       FontWeight="SemiBold" HorizontalAlignment="Right"/>
                         </Grid>
 
-                        <TextBlock x:Name="ErrorText" Text="" Foreground="#FF6B8B" FontSize="13" Margin="0,12,0,0"
-                                   TextWrapping="Wrap"/>
+                        <TextBlock x:Name="ErrorText" Text="" Foreground="{StaticResource ErrorBrush}" FontSize="12"
+                                   Margin="0,10,0,0" TextWrapping="Wrap"/>
 
                         <Button x:Name="PayButton" Content="Оплатить" Style="{StaticResource AccentButton}"
-                                FontSize="16" Padding="0,15" Margin="0,16,0,0" Click="Pay_Click"/>
+                                FontSize="15" Padding="0,10" Margin="0,10,0,0" Click="Pay_Click"/>
 
-                        <TextBlock Text="Нажимая «Оплатить», вы соглашаетесь с правилами сервиса"
-                                   Foreground="#6E6E88" FontSize="12" TextWrapping="Wrap" Margin="0,12,0,0"
-                                   TextAlignment="Center"/>
+                        <TextBlock Text="Нажимая «Оплатить», вы соглашаетесь с правилами сервиса."
+                                   Foreground="#61686D" FontSize="11" TextWrapping="Wrap" Margin="0,10,0,0"/>
                     </StackPanel>
                 </Border>
             </Grid>

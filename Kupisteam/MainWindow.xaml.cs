@@ -16,7 +16,7 @@ namespace Kupisteam
         {
             InitializeComponent();
             Instance = this;
-            MainFrame.Navigate(new CatalogPage());
+            GoCatalog();
             UpdateHeader();
         }
 
@@ -33,6 +33,7 @@ namespace Kupisteam
                 ProfileButton.Visibility = Visibility.Visible;
                 BalancePanel.Visibility = Visibility.Visible;
                 ProfileName.Text = Data.CurrentUser.Login;
+                HeaderAvatar.Text = Data.CurrentUser.Login.Substring(0, 1).ToUpper();
                 BalanceText.Text = Data.CurrentUser.Balance + " ₽";
             }
             else
@@ -64,10 +65,19 @@ namespace Kupisteam
             return Data.CurrentUser != null;
         }
 
-        public void GoCatalog() { MainFrame.Navigate(new CatalogPage()); }
-        public void GoTopUp() { MainFrame.Navigate(new TopUpPage()); }
-        public void GoCart() { MainFrame.Navigate(new CartPage()); }
-        public void GoProfile() { MainFrame.Navigate(new ProfilePage()); }
+        public void GoCatalog() { SetActive(NavCatalog); MainFrame.Navigate(new CatalogPage()); }
+        public void GoTopUp() { SetActive(NavTopUp); MainFrame.Navigate(new TopUpPage()); }
+        public void GoCart() { SetActive(null); MainFrame.Navigate(new CartPage()); }
+        public void GoProfile() { SetActive(NavProfile); MainFrame.Navigate(new ProfilePage()); }
+
+        // Подсветить текущий пункт меню (синяя полоска снизу, как в Steam)
+        void SetActive(System.Windows.Controls.Button active)
+        {
+            NavCatalog.Tag = null;
+            NavTopUp.Tag = null;
+            NavProfile.Tag = null;
+            if (active != null) active.Tag = "active";
+        }
 
         private void Logo_Click(object sender, System.Windows.Input.MouseButtonEventArgs e) { GoCatalog(); }
         private void NavCatalog_Click(object sender, RoutedEventArgs e) { GoCatalog(); }

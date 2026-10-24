@@ -5,61 +5,69 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
 
-        <!-- ===== ЦВЕТА ===== -->
-        <SolidColorBrush x:Key="BgBrush" Color="#0D0D17"/>
-        <SolidColorBrush x:Key="PanelBrush" Color="#141424"/>
-        <SolidColorBrush x:Key="CardBrush" Color="#1B1B2E"/>
-        <SolidColorBrush x:Key="LineBrush" Color="#2A2A42"/>
-        <SolidColorBrush x:Key="GrayText" Color="#9A9AB5"/>
-        <SolidColorBrush x:Key="PurpleBrush" Color="#8A5CFF"/>
-        <SolidColorBrush x:Key="PinkBrush" Color="#FF4FA3"/>
-        <SolidColorBrush x:Key="GreenBrush" Color="#3DDC97"/>
-
-        <LinearGradientBrush x:Key="AccentBrush" StartPoint="0,0" EndPoint="1,1">
-            <GradientStop Color="#8A5CFF" Offset="0"/>
-            <GradientStop Color="#FF4FA3" Offset="1"/>
+        <!-- ===== ЦВЕТА (палитра Steam) ===== -->
+        <SolidColorBrush x:Key="BgBrush" Color="#1B2838"/>
+        <SolidColorBrush x:Key="HeaderBrush" Color="#171A21"/>
+        <SolidColorBrush x:Key="PanelBrush" Color="#16202D"/>
+        <SolidColorBrush x:Key="CardBrush" Color="#16202D"/>
+        <SolidColorBrush x:Key="LineBrush" Color="#2A3F5A"/>
+        <SolidColorBrush x:Key="GrayText" Color="#8F98A0"/>
+        <SolidColorBrush x:Key="LightText" Color="#C7D5E0"/>
+        <SolidColorBrush x:Key="LinkBrush" Color="#66C0F4"/>
+        <SolidColorBrush x:Key="GreenBrush" Color="#A4D007"/>
+        <SolidColorBrush x:Key="PriceGreenBrush" Color="#BEEE11"/>
+        <SolidColorBrush x:Key="DiscountBgBrush" Color="#4C6B22"/>
+        <SolidColorBrush x:Key="PriceBgBrush" Color="#344654"/>
+        <SolidColorBrush x:Key="ErrorBrush" Color="#C15755"/>
+        <SolidColorBrush x:Key="TabActiveBrush" Color="#2A475E"/>
+        <SolidColorBrush x:Key="StoreNavActiveBrush" Color="#4DB7E2FF"/>
+        <LinearGradientBrush x:Key="StoreNavBrush" StartPoint="0,0" EndPoint="1,0">
+            <GradientStop Color="#3E7EA7" Offset="0"/>
+            <GradientStop Color="#2F5B85" Offset="1"/>
         </LinearGradientBrush>
+        <!-- старые ключи оставлены для совместимости -->
+        <SolidColorBrush x:Key="PurpleBrush" Color="#66C0F4"/>
+        <SolidColorBrush x:Key="PinkBrush" Color="#C7D5E0"/>
+        <SolidColorBrush x:Key="AccentBrush" Color="#66C0F4"/>
 
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
 
-        <!-- ===== ГЛАВНАЯ КНОПКА (градиент) ===== -->
+        <!-- ===== ЗЕЛЁНАЯ КНОПКА ПОКУПКИ (как «В корзину» в Steam) ===== -->
         <Style x:Key="AccentButton" TargetType="Button">
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Foreground" Value="#D2EFA9"/>
             <Setter Property="FontFamily" Value="Segoe UI"/>
-            <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Padding" Value="22,11"/>
+            <Setter Property="Padding" Value="16,8"/>
             <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Background" Value="{StaticResource AccentBrush}"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#75B022" Offset="0"/>
+                        <GradientStop Color="#588A1B" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border x:Name="bd" Background="{TemplateBinding Background}" CornerRadius="10"
-                                Padding="{TemplateBinding Padding}" RenderTransformOrigin="0.5,0.5">
-                            <Border.RenderTransform>
-                                <ScaleTransform ScaleX="1" ScaleY="1"/>
-                            </Border.RenderTransform>
+                        <Border x:Name="bd" Background="{TemplateBinding Background}" CornerRadius="2"
+                                Padding="{TemplateBinding Padding}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="bd" Property="RenderTransform">
+                                <Setter TargetName="bd" Property="Background">
                                     <Setter.Value>
-                                        <ScaleTransform ScaleX="1.04" ScaleY="1.04"/>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                            <GradientStop Color="#8ED629" Offset="0"/>
+                                            <GradientStop Color="#6AA621" Offset="1"/>
+                                        </LinearGradientBrush>
                                     </Setter.Value>
                                 </Setter>
-                                <Setter TargetName="bd" Property="Effect">
-                                    <Setter.Value>
-                                        <DropShadowEffect Color="#FF4FA3" BlurRadius="22" ShadowDepth="0" Opacity="0.6"/>
-                                    </Setter.Value>
-                                </Setter>
+                                <Setter Property="Foreground" Value="White"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="bd" Property="RenderTransform">
-                                    <Setter.Value>
-                                        <ScaleTransform ScaleX="0.97" ScaleY="0.97"/>
-                                    </Setter.Value>
-                                </Setter>
+                                <Setter TargetName="bd" Property="Background" Value="#4E7A18"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="False">
                                 <Setter TargetName="bd" Property="Opacity" Value="0.4"/>
@@ -70,28 +78,44 @@
             </Setter>
         </Style>
 
-        <!-- ===== ТЁМНАЯ КНОПКА С РАМКОЙ ===== -->
-        <Style x:Key="GhostButton" TargetType="Button">
+        <!-- ===== СИНЯЯ КНОПКА (как «Войти» в Steam) ===== -->
+        <Style x:Key="BlueButton" TargetType="Button">
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontFamily" Value="Segoe UI"/>
-            <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Padding" Value="18,9"/>
+            <Setter Property="Padding" Value="16,8"/>
             <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Background" Value="{StaticResource CardBrush}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource LineBrush}"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#06BFFF" Offset="0"/>
+                        <GradientStop Color="#2D73FF" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border x:Name="bd" Background="{TemplateBinding Background}" CornerRadius="10"
-                                BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1"
+                        <Border x:Name="bd" Background="{TemplateBinding Background}" CornerRadius="2"
                                 Padding="{TemplateBinding Padding}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="bd" Property="BorderBrush" Value="#8A5CFF"/>
-                                <Setter TargetName="bd" Property="Background" Value="#24243C"/>
+                                <Setter TargetName="bd" Property="Background">
+                                    <Setter.Value>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                            <GradientStop Color="#38CCFF" Offset="0"/>
+                                            <GradientStop Color="#4C8AFF" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="bd" Property="Background" Value="#1C5FD6"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="bd" Property="Opacity" Value="0.4"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -99,24 +123,31 @@
             </Setter>
         </Style>
 
-        <!-- ===== КНОПКА МЕНЮ В ШАПКЕ ===== -->
-        <Style x:Key="NavButton" TargetType="Button">
-            <Setter Property="Foreground" Value="#B8B8D0"/>
+        <!-- ===== ВТОРИЧНАЯ КНОПКА (blue hover-fade, как в Steam) ===== -->
+        <Style x:Key="GhostButton" TargetType="Button">
+            <Setter Property="Foreground" Value="#67C1F5"/>
             <Setter Property="FontFamily" Value="Segoe UI"/>
-            <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="FontSize" Value="15"/>
-            <Setter Property="Padding" Value="16,8"/>
-            <Setter Property="Margin" Value="4,0"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="14,7"/>
             <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Background" Value="#3367C1F5"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border x:Name="bd" Background="Transparent" CornerRadius="10" Padding="{TemplateBinding Padding}">
+                        <Border x:Name="bd" Background="{TemplateBinding Background}" CornerRadius="2"
+                                Padding="{TemplateBinding Padding}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="bd" Property="Background" Value="#1F1F35"/>
+                                <Setter TargetName="bd" Property="Background">
+                                    <Setter.Value>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                            <GradientStop Color="#66C0F4" Offset="0"/>
+                                            <GradientStop Color="#417A9B" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
                                 <Setter Property="Foreground" Value="White"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
@@ -125,24 +156,152 @@
             </Setter>
         </Style>
 
-        <!-- ===== КРУГЛАЯ КНОПКА-ИКОНКА ===== -->
-        <Style x:Key="IconButton" TargetType="Button">
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Width" Value="36"/>
-            <Setter Property="Height" Value="36"/>
+        <!-- ===== ПУНКТ МЕНЮ В ШАПКЕ (Tag="active" — текущая страница) ===== -->
+        <Style x:Key="NavButton" TargetType="Button">
+            <Setter Property="Foreground" Value="#DCDEDF"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Padding" Value="14,0"/>
             <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Background" Value="#2A2A42"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border x:Name="bd" Background="{TemplateBinding Background}" CornerRadius="18">
+                        <Grid Background="Transparent">
+                            <ContentPresenter Margin="{TemplateBinding Padding}"
+                                              HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <Border x:Name="line" Height="3" VerticalAlignment="Bottom" Margin="14,0"
+                                    Background="#1A9FFF" Visibility="Collapsed"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="Tag" Value="active">
+                                <Setter Property="Foreground" Value="#1A9FFF"/>
+                                <Setter TargetName="line" Property="Visibility" Value="Visible"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- ===== ПУНКТ СИНЕЙ ПАНЕЛИ МАГАЗИНА ===== -->
+        <Style x:Key="StoreNavButton" TargetType="Button">
+            <Setter Property="Foreground" Value="#E5E5E5"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Padding" Value="14,0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="bd" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bd" Property="Background" Value="#26FFFFFF"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- ===== ВКЛАДКА (жанры, вход/регистрация) ===== -->
+        <Style x:Key="TabButton" TargetType="Button">
+            <Setter Property="Foreground" Value="#8F98A0"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="16,8"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="bd" Background="{TemplateBinding Background}" CornerRadius="2,2,0,0"
+                                Padding="{TemplateBinding Padding}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="bd" Property="Background" Value="#8A5CFF"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- ===== МАЛЕНЬКАЯ КВАДРАТНАЯ КНОПКА-ИКОНКА ===== -->
+        <Style x:Key="IconButton" TargetType="Button">
+            <Setter Property="Foreground" Value="#C7D5E0"/>
+            <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Background" Value="#2A3F5A"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="bd" Background="{TemplateBinding Background}" CornerRadius="2">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bd" Property="Background" Value="#66C0F4"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- ===== СТРЕЛКА КАРУСЕЛИ ===== -->
+        <Style x:Key="ArrowButton" TargetType="Button">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="Width" Value="40"/>
+            <Setter Property="Height" Value="100"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="bd" Background="#33000000">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bd" Property="Background" Value="#4DABDAF4"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- ===== ТЕКСТОВАЯ ССЫЛКА ===== -->
+        <Style x:Key="LinkButton" TargetType="Button">
+            <Setter Property="Foreground" Value="#8F98A0"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="Transparent">
+                            <ContentPresenter x:Name="cp" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="White"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -153,21 +312,57 @@
         <!-- ===== ПОЛЕ ВВОДА (Tag = подсказка) ===== -->
         <Style x:Key="DarkTextBox" TargetType="TextBox">
             <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Background" Value="{StaticResource CardBrush}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource LineBrush}"/>
+            <Setter Property="Background" Value="#32353C"/>
+            <Setter Property="BorderBrush" Value="#32353C"/>
             <Setter Property="CaretBrush" Value="White"/>
             <Setter Property="FontFamily" Value="Segoe UI"/>
             <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Padding" Value="12,10"/>
+            <Setter Property="Padding" Value="10,8"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
-                        <Border x:Name="bd" Background="{TemplateBinding Background}" CornerRadius="10"
+                        <Border x:Name="bd" Background="{TemplateBinding Background}" CornerRadius="2"
                                 BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1">
                             <Grid>
-                                <TextBlock x:Name="hint" Text="{TemplateBinding Tag}" Foreground="#5E5E7A"
-                                           Margin="15,0,0,0" VerticalAlignment="Center" Visibility="Collapsed"
-                                           FontSize="{TemplateBinding FontSize}"/>
+                                <TextBlock x:Name="hint" Text="{TemplateBinding Tag}" Foreground="#6B7179"
+                                           Margin="13,0,0,0" VerticalAlignment="Center" Visibility="Collapsed"
+                                           FontSize="{TemplateBinding FontSize}" FontWeight="Normal"/>
+                                <ScrollViewer x:Name="PART_ContentHost" Padding="{TemplateBinding Padding}"
+                                              VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Text" Value="">
+                                <Setter TargetName="hint" Property="Visibility" Value="Visible"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bd" Property="Background" Value="#393C44"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter TargetName="bd" Property="Background" Value="#393C44"/>
+                                <Setter TargetName="bd" Property="BorderBrush" Value="#1999FF"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- ===== ПОИСК В СИНЕЙ ПАНЕЛИ МАГАЗИНА ===== -->
+        <Style x:Key="SearchTextBox" TargetType="TextBox" BasedOn="{StaticResource DarkTextBox}">
+            <Setter Property="Background" Value="#316282"/>
+            <Setter Property="BorderBrush" Value="#4D000000"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Padding" Value="8,4,34,4"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border x:Name="bd" Background="{TemplateBinding Background}" CornerRadius="3"
+                                BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1">
+                            <Grid>
+                                <TextBlock x:Name="hint" Text="{TemplateBinding Tag}" Foreground="#8FB3CE"
+                                           FontStyle="Italic" Margin="11,0,0,0" VerticalAlignment="Center"
+                                           Visibility="Collapsed" FontSize="{TemplateBinding FontSize}"/>
                                 <ScrollViewer x:Name="PART_ContentHost" Padding="{TemplateBinding Padding}"
                                               VerticalAlignment="Center"/>
                             </Grid>
@@ -177,7 +372,7 @@
                                 <Setter TargetName="hint" Property="Visibility" Value="Visible"/>
                             </Trigger>
                             <Trigger Property="IsKeyboardFocused" Value="True">
-                                <Setter TargetName="bd" Property="BorderBrush" Value="#8A5CFF"/>
+                                <Setter TargetName="bd" Property="BorderBrush" Value="#66C0F4"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -187,22 +382,26 @@
 
         <Style x:Key="DarkPasswordBox" TargetType="PasswordBox">
             <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Background" Value="{StaticResource CardBrush}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource LineBrush}"/>
+            <Setter Property="Background" Value="#32353C"/>
+            <Setter Property="BorderBrush" Value="#32353C"/>
             <Setter Property="CaretBrush" Value="White"/>
             <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Padding" Value="12,10"/>
+            <Setter Property="Padding" Value="10,8"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="PasswordBox">
-                        <Border x:Name="bd" Background="{TemplateBinding Background}" CornerRadius="10"
+                        <Border x:Name="bd" Background="{TemplateBinding Background}" CornerRadius="2"
                                 BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1">
                             <ScrollViewer x:Name="PART_ContentHost" Padding="{TemplateBinding Padding}"
                                           VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bd" Property="Background" Value="#393C44"/>
+                            </Trigger>
                             <Trigger Property="IsKeyboardFocused" Value="True">
-                                <Setter TargetName="bd" Property="BorderBrush" Value="#8A5CFF"/>
+                                <Setter TargetName="bd" Property="Background" Value="#393C44"/>
+                                <Setter TargetName="bd" Property="BorderBrush" Value="#1999FF"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -210,62 +409,85 @@
             </Setter>
         </Style>
 
-        <!-- ===== КАРТОЧКА ИГРЫ (поднимается при наведении) ===== -->
+        <!-- ===== КАРТОЧКА ИГРЫ (капсула Steam) ===== -->
         <Style x:Key="GameCard" TargetType="Border">
-            <Setter Property="Background" Value="{StaticResource CardBrush}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource LineBrush}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="CornerRadius" Value="14"/>
-            <Setter Property="RenderTransform">
-                <Setter.Value>
-                    <TranslateTransform Y="0"/>
-                </Setter.Value>
-            </Setter>
+            <Setter Property="Background" Value="#16202D"/>
+            <Setter Property="Cursor" Value="Hand"/>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="BorderBrush" Value="#8A5CFF"/>
-                    <Setter Property="RenderTransform">
-                        <Setter.Value>
-                            <TranslateTransform Y="-5"/>
-                        </Setter.Value>
-                    </Setter>
-                    <Setter Property="Effect">
-                        <Setter.Value>
-                            <DropShadowEffect Color="#8A5CFF" BlurRadius="25" ShadowDepth="0" Opacity="0.45"/>
-                        </Setter.Value>
-                    </Setter>
+                    <Setter Property="Background" Value="#22384D"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
 
-        <!-- Обычная панель -->
+        <!-- Обычная панель (rgba(0,0,0,.2) поверх фона, как в Steam) -->
         <Style x:Key="Panel" TargetType="Border">
             <Setter Property="Background" Value="{StaticResource PanelBrush}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource LineBrush}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="CornerRadius" Value="16"/>
-            <Setter Property="Padding" Value="24"/>
+            <Setter Property="CornerRadius" Value="3"/>
+            <Setter Property="Padding" Value="20"/>
+        </Style>
+
+        <!-- ===== ТЕКСТ ===== -->
+        <Style x:Key="PageTitle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="26"/>
+            <Setter Property="FontWeight" Value="Light"/>
+        </Style>
+
+        <Style x:Key="SectionTitle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+        </Style>
+
+        <Style x:Key="Breadcrumb" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#8F98A0"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Margin" Value="0,0,0,6"/>
+        </Style>
+
+        <Style x:Key="FieldLabel" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#AFAFAF"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Margin" Value="0,0,0,6"/>
+        </Style>
+
+        <!-- Линия под заголовком секции (как на главной Steam) -->
+        <Style x:Key="SectionLine" TargetType="Border">
+            <Setter Property="Height" Value="1"/>
+            <Setter Property="Margin" Value="0,6,0,12"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#3B6E8C" Offset="0"/>
+                        <GradientStop Color="#003B6E8C" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
         </Style>
 
         <!-- ===== ТОНКИЙ СКРОЛЛБАР ===== -->
         <Style TargetType="ScrollBar">
-            <Setter Property="Width" Value="8"/>
-            <Setter Property="MinWidth" Value="8"/>
-            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Width" Value="10"/>
+            <Setter Property="MinWidth" Value="10"/>
+            <Setter Property="Background" Value="#171A21"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ScrollBar">
-                        <Track x:Name="PART_Track" IsDirectionReversed="True">
-                            <Track.Thumb>
-                                <Thumb>
-                                    <Thumb.Template>
-                                        <ControlTemplate TargetType="Thumb">
-                                            <Border CornerRadius="4" Background="#3A3A58" Margin="1"/>
-                                        </ControlTemplate>
-                                    </Thumb.Template>
-                                </Thumb>
-                            </Track.Thumb>
-                        </Track>
+                        <Border Background="{TemplateBinding Background}">
+                            <Track x:Name="PART_Track" IsDirectionReversed="True">
+                                <Track.Thumb>
+                                    <Thumb>
+                                        <Thumb.Template>
+                                            <ControlTemplate TargetType="Thumb">
+                                                <Border CornerRadius="2" Background="#3D4C5E" Margin="2"/>
+                                            </ControlTemplate>
+                                        </Thumb.Template>
+                                    </Thumb>
+                                </Track.Thumb>
+                            </Track>
+                        </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
